@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DFD92A10-28D6-4C46-A360-B33160E65A2F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>espurl.win.screenshot</RootNamespace>
+    <AssemblyName>espurl.win.screenshot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Greenshot\icons\applicationIcon\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http">
+      <HintPath>..\lib\Microsoft.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Forms\EspMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EspMainForm.Designer.cs">
+      <DependentUpon>EspMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ListForm.Designer.cs">
+      <DependentUpon>ListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\AutoStart.cs" />
+    <Compile Include="Infrastructure\EspUrlClient.cs" />
+    <Compile Include="Infrastructure\FileUploadResponse.cs" />
+    <Compile Include="Forms\ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ResponseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ResponseForm.Designer.cs">
+      <DependentUpon>ResponseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GreenshotPlugin\Controls\BackgroundForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GreenshotPlugin\Controls\BackgroundForm.Designer.cs">
+      <DependentUpon>BackgroundForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GreenshotPlugin\Controls\HotkeyControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GreenshotPlugin\Core\AccessibleHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\BitmapBuffer.cs" />
+    <Compile Include="GreenshotPlugin\Core\CoreConfiguration.cs" />
+    <Compile Include="GreenshotPlugin\Core\CredentialsHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\DisplayKeyAttribute.cs" />
+    <Compile Include="GreenshotPlugin\Core\EmailConfigHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\EnumExtensions.cs" />
+    <Compile Include="GreenshotPlugin\Core\GreenshotResources.cs" />
+    <Compile Include="GreenshotPlugin\Core\IEHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\ImageHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\LanguageHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\LogHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\NetworkHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\Objects.cs" />
+    <Compile Include="GreenshotPlugin\Core\PluginUtils.cs" />
+    <Compile Include="GreenshotPlugin\Core\PropertyHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\SourceForgeHelper.cs" />
+    <Compile Include="GreenshotPlugin\Core\WindowCapture.cs" />
+    <Compile Include="GreenshotPlugin\Core\WindowsHelper.cs" />
+    <Compile Include="GreenshotPlugin\IniFile\IniAttributes.cs" />
+    <Compile Include="GreenshotPlugin\IniFile\IniConfig.cs" />
+    <Compile Include="GreenshotPlugin\IniFile\IniReader.cs" />
+    <Compile Include="GreenshotPlugin\IniFile\IniSection.cs" />
+    <Compile Include="GreenshotPlugin\Interfaces\Capture.cs" />
+    <Compile Include="GreenshotPlugin\Interfaces\Drawing\Container.cs" />
+    <Compile Include="GreenshotPlugin\Interfaces\Forms\ImageEditor.cs" />
+    <Compile Include="GreenshotPlugin\Interfaces\Generic.cs" />
+    <Compile Include="GreenshotPlugin\Interfaces\Plugin\PluginInterfaces.cs" />
+    <Compile Include="GreenshotPlugin\Interop\ComProgIdAttribute.cs" />
+    <Compile Include="GreenshotPlugin\Interop\COMWrapper.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\DWM.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\Enumerations.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\GDI32.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\Kernel32.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\Structs.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\User32.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\Win32Errors.cs" />
+    <Compile Include="GreenshotPlugin\UnmanagedHelpers\WinMM.cs" />
+    <Compile Include="Greenshot\Configuration\AppConfig.cs" />
+    <Compile Include="Greenshot\Configuration\EditorConfiguration.cs" />
+    <Compile Include="Greenshot\Configuration\Language.cs" />
+    <Compile Include="Greenshot\Configuration\LanguageKeys.cs" />
+    <Compile Include="Greenshot\Configuration\RuntimeConfig.cs" />
+    <Compile Include="Greenshot\Controls\BindableToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\BindableToolStripComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\BindableToolStripDropDownButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\ColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\FontFamilyComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\NonJumpingPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\ToolStripColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Controls\ToolStripNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Drawing\ArrowContainer.cs" />
+    <Compile Include="Greenshot\Drawing\BitmapContainer.cs" />
+    <Compile Include="Greenshot\Drawing\CropContainer.cs" />
+    <Compile Include="Greenshot\Drawing\CursorContainer.cs" />
+    <Compile Include="Greenshot\Drawing\DrawableContainer.cs" />
+    <Compile Include="Greenshot\Drawing\DrawableContainerList.cs" />
+    <Compile Include="Greenshot\Drawing\EllipseContainer.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\AbstractFieldHolder.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\AbstractFieldHolderWithChildren.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\AbstractBindingConverter.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\BidirectionalBinding.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\DecimalDoublePercentageConverter.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\DecimalFloatConverter.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\DecimalIntConverter.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\IBindingConverter.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\IBindingValidator.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Binding\NotNullValidator.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\Field.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\FieldAggregator.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\FieldType.cs" />
+    <Compile Include="Greenshot\Drawing\Fields\IFieldHolder.cs" />
+    <Compile Include="Greenshot\Drawing\FilterContainer.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\AbstractFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\BlurFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\BrightnessFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\FastSmoothFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\GrayscaleFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\HighlightFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\IFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\MagnifierFilter.cs" />
+    <Compile Include="Greenshot\Drawing\Filters\PixelizationFilter.cs" />
+    <Compile Include="Greenshot\Drawing\FreehandContainer.cs" />
+    <Compile Include="Greenshot\Drawing\HighlightContainer.cs" />
+    <Compile Include="Greenshot\Drawing\IconContainer.cs" />
+    <Compile Include="Greenshot\Drawing\LineContainer.cs" />
+    <Compile Include="Greenshot\Drawing\MetafileContainer.cs" />
+    <Compile Include="Greenshot\Drawing\ObfuscateContainer.cs" />
+    <Compile Include="Greenshot\Drawing\RectangleContainer.cs" />
+    <Compile Include="Greenshot\Drawing\RoundedRectangle.cs" />
+    <Compile Include="Greenshot\Drawing\Surface.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Drawing\TextContainer.cs" />
+    <Compile Include="Greenshot\Forms\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\BugReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\BugReportForm.Designer.cs">
+      <DependentUpon>BugReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\CaptureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\CaptureForm.Designer.cs">
+      <DependentUpon>CaptureForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\ColorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\ColorDialog.Designer.cs">
+      <DependentUpon>ColorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\DestinationPickerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\DestinationPickerForm.Designer.cs">
+      <DependentUpon>DestinationPickerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\FormWithoutActivation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\ImageEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\ImageEditorForm.Designer.cs">
+      <DependentUpon>ImageEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\JpegQualityDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\JpegQualityDialog.Designer.cs">
+      <DependentUpon>JpegQualityDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\LanguageDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\LanguageDialog.Designer.cs">
+      <DependentUpon>LanguageDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\PrintOptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\PrintOptionsDialog.Designer.cs">
+      <DependentUpon>PrintOptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\SaveImageFileDialog.cs" />
+    <Compile Include="Greenshot\Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Forms\ToolStripMenuSelectList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Greenshot\GreenshotMain.cs" />
+    <Compile Include="Greenshot\Helpers\AviHelper.cs" />
+    <Compile Include="Greenshot\Helpers\ClipboardHelper.cs" />
+    <Compile Include="Greenshot\Helpers\Colors.cs" />
+    <Compile Include="Greenshot\Helpers\CopyData.cs" />
+    <Compile Include="Greenshot\Helpers\EnvironmentInfo.cs" />
+    <Compile Include="Greenshot\Helpers\FilenameHelper.cs" />
+    <Compile Include="Greenshot\Helpers\GuiRectangle.cs" />
+    <Compile Include="Greenshot\Helpers\IECaptureHelper.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IEContainer.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLBodyElement.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLDocument.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLDocument2.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLDocument3.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLDocument4.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLDocument5.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLElement.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLElement2.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLElementCollection.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLFrameBase.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLFramesCollection2.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLRect.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLScreen.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLScreen2.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLSelectionObject.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLStyle.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLTxtRange.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLWindow2.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLWindow3.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IHTMLWindow4.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IOleWindow.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IServiceProvider.cs" />
+    <Compile Include="Greenshot\Helpers\IEInterop\IWebBrowser2.cs" />
+    <Compile Include="Greenshot\Helpers\ImageOutput.cs" />
+    <Compile Include="Greenshot\Helpers\LogHelper.cs" />
+    <Compile Include="Greenshot\Helpers\MailHelper.cs" />
+    <Compile Include="Greenshot\Helpers\MouseHelper.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\ExcelWrapper.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\OfficeWrappers.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\OutlookUtils.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\OutlookWrapper.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\PowerpointWrapper.cs" />
+    <Compile Include="Greenshot\Helpers\OfficeInterop\WordWrapper.cs" />
+    <Compile Include="Greenshot\Helpers\PluginHelper.cs" />
+    <Compile Include="Greenshot\Helpers\PrintHelper.cs" />
+    <Compile Include="Greenshot\Helpers\QuantizerHelper.cs" />
+    <Compile Include="Greenshot\Helpers\ScaleHelper.cs" />
+    <Compile Include="Greenshot\Helpers\ScreenCaptureHelper.cs" />
+    <Compile Include="Greenshot\Helpers\SoundHelper.cs" />
+    <Compile Include="Greenshot\Helpers\StartupHelper.cs" />
+    <Compile Include="Greenshot\Helpers\ToolStripItemEndisabler.cs" />
+    <Compile Include="Greenshot\Helpers\UpdateHelper.cs" />
+    <Compile Include="Greenshot\Help\HelpBrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Greenshot\Help\HelpBrowserForm.Designer.cs">
+      <DependentUpon>HelpBrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Greenshot\Memento\AddElementMemento.cs" />
+    <Compile Include="Greenshot\Memento\ChangeFieldHolderMemento.cs" />
+    <Compile Include="Greenshot\Memento\DeleteElementMemento.cs" />
+    <Compile Include="Greenshot\Memento\DrawableContainerBoundsChangeMemento.cs" />
+    <Compile Include="Greenshot\Memento\IMemento.cs" />
+    <Compile Include="Greenshot\Memento\SurfaceCropMemento.cs" />
+    <Compile Include="Greenshot\Memento\TextChangeMemento.cs" />
+    <Compile Include="Infrastructure\SettingsManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\EspMainForm.resx">
+      <DependentUpon>EspMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ListForm.resx">
+      <DependentUpon>ListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProgressForm.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ResponseForm.resx">
+      <DependentUpon>ResponseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GreenshotPlugin\Controls\BackgroundForm.resx">
+      <DependentUpon>BackgroundForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GreenshotPlugin\Core\GreenshotResources.resx">
+      <DependentUpon>GreenshotResources.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Greenshot\Forms\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Greenshot\Forms\ImageEditorForm.resx">
+      <DependentUpon>ImageEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Greenshot\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Greenshot\Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Greenshot\Sounds.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="GreenshotPlugin\Properties\AssemblyInfo.cs.template" />
+    <None Include="Greenshot\icons\fugue\filter_base.pdn" />
+    <None Include="Greenshot\releases\innosetup\IssProc\IssProcLanguage.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\czech.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\english.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\french.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\french2.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\french3.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\german.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\german2.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\german3.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\isxdl.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\norwegian.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\polish.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\portugues.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\portuguese.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\russian.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\spanish.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\isxdl\swedish.ini" />
+    <None Include="Greenshot\releases\innosetup\scripts\products.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx11.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx11lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx11sp1.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20sp1.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20sp1lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20sp2.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx20sp2lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx35.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx35lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx35sp1.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\dotnetfx35sp1lp.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\fileversion.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\ie6.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\iis.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\jet4sp8.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\kb835732.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\kb886903.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\kb928366.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\mdac28.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\msi20.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\msi31.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\sql2005express.iss" />
+    <None Include="Greenshot\releases\innosetup\scripts\products\winversion.iss" />
+    <None Include="Greenshot\releases\innosetup\setup.iss" />
+    <None Include="Greenshot\tools\innosetup\Default.isl" />
+    <None Include="Greenshot\tools\innosetup\Examples\64Bit.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\64BitThreeArch.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\64BitTwoArch.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeAutomation.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeAutomation2.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeClasses.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeDlg.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeDll.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodeExample1.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\CodePrepareToInstall.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\Components.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\Example1.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\Example2.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\Example3.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\ISPPExample1.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\Languages.iss" />
+    <None Include="Greenshot\tools\innosetup\Examples\MyDll\Delphi\MyDll.dpr" />
+    <None Include="Greenshot\tools\innosetup\Examples\MyProg.chm" />
+    <None Include="Greenshot\tools\innosetup\Examples\UninstallCodeExample1.iss" />
+    <None Include="Greenshot\tools\innosetup\ISetup.chm" />
+    <None Include="Greenshot\tools\innosetup\ISPP.chm" />
+    <None Include="Greenshot\tools\innosetup\ISPPBuiltins.iss" />
+    <None Include="Greenshot\tools\innosetup\Languages\Basque.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\BrazilianPortuguese.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Catalan.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Czech.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Danish.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Dutch.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Finnish.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\French.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\German.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Hebrew.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Hungarian.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Italian.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Japanese.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Norwegian.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Polish.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Portuguese.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Russian.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Slovak.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Slovenian.isl" />
+    <None Include="Greenshot\tools\innosetup\Languages\Spanish.isl" />
+    <None Include="Greenshot\tools\innosetup\Setup.e32" />
+    <None Include="Greenshot\tools\innosetup\SetupLdr.e32" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Greenshot\icons\applicationIcon\16.ico" />
+    <Content Include="Greenshot\icons\applicationIcon\16.png" />
+    <Content Include="Greenshot\icons\applicationIcon\32.ico" />
+    <Content Include="Greenshot\icons\applicationIcon\32.png" />
+    <Content Include="Greenshot\icons\applicationIcon\48.ico" />
+    <Content Include="Greenshot\icons\applicationIcon\48.png" />
+    <Content Include="Greenshot\icons\applicationIcon\90.png" />
+    <Content Include="Greenshot\icons\applicationIcon\icon.ico" />
+    <Content Include="Greenshot\icons\arrow_redo.png" />
+    <Content Include="Greenshot\icons\arrow_rollback.png" />
+    <Content Include="Greenshot\icons\arrow_undo.png" />
+    <Content Include="Greenshot\icons\cancel.png" />
+    <Content Include="Greenshot\icons\cross.png" />
+    <Content Include="Greenshot\icons\cut.png" />
+    <Content Include="Greenshot\icons\delete.png" />
+    <Content Include="Greenshot\icons\filter_blur.png" />
+    <Content Include="Greenshot\icons\filter_pixelate.png" />
+    <Content Include="Greenshot\icons\folder_explore.png" />
+    <Content Include="Greenshot\icons\font_color.png" />
+    <Content Include="Greenshot\icons\freehand.png" />
+    <Content Include="Greenshot\icons\fugue\arrow-resize.png" />
+    <Content Include="Greenshot\icons\fugue\clipboard-paste-image.png" />
+    <Content Include="Greenshot\icons\fugue\clipboard.png" />
+    <Content Include="Greenshot\icons\fugue\color-swatch.png" />
+    <Content Include="Greenshot\icons\fugue\cross.png" />
+    <Content Include="Greenshot\icons\fugue\cursor.png" />
+    <Content Include="Greenshot\icons\fugue\disk-black.png" />
+    <Content Include="Greenshot\icons\fugue\edit-blur.png" />
+    <Content Include="Greenshot\icons\fugue\edit-bold.png" />
+    <Content Include="Greenshot\icons\fugue\edit-italic.png" />
+    <Content Include="Greenshot\icons\fugue\edit-pixelate.png" />
+    <Content Include="Greenshot\icons\fugue\edit-underline.png" />
+    <Content Include="Greenshot\icons\fugue\filter_highlight_area.png" />
+    <Content Include="Greenshot\icons\fugue\filter_highlight_grayscale.png" />
+    <Content Include="Greenshot\icons\fugue\filter_highlight_text.png" />
+    <Content Include="Greenshot\icons\fugue\gear.png" />
+    <Content Include="Greenshot\icons\fugue\highlighter-color.png" />
+    <Content Include="Greenshot\icons\fugue\highlighter-text.png" />
+    <Content Include="Greenshot\icons\fugue\image-blur.png" />
+    <Content Include="Greenshot\icons\fugue\image-pixelate.png" />
+    <Content Include="Greenshot\icons\fugue\images.png" />
+    <Content Include="Greenshot\icons\fugue\layer-shape-arrow.png" />
+    <Content Include="Greenshot\icons\fugue\layer-shape-ellipse.png" />
+    <Content Include="Greenshot\icons\fugue\layer-shape-line.png" />
+    <Content Include="Greenshot\icons\fugue\layer-shape-text.png" />
+    <Content Include="Greenshot\icons\fugue\layer-shape.png" />
+    <Content Include="Greenshot\icons\fugue\magnifier.png" />
+    <Content Include="Greenshot\icons\fugue\mail-open-image.png" />
+    <Content Include="Greenshot\icons\fugue\minus-circle.png" />
+    <Content Include="Greenshot\icons\fugue\money-coin.png" />
+    <Content Include="Greenshot\icons\fugue\paint-can-color-bg.png" />
+    <Content Include="Greenshot\icons\fugue\paint-can-color.png" />
+    <Content Include="Greenshot\icons\fugue\pencil-color-bg.png" />
+    <Content Include="Greenshot\icons\fugue\pencil-color.png" />
+    <Content Include="Greenshot\icons\fugue\printer.png" />
+    <Content Include="Greenshot\icons\fugue\question.png" />
+    <Content Include="Greenshot\icons\fugue\ruler-crop.png" />
+    <Content Include="Greenshot\icons\fugue\scissors.png" />
+    <Content Include="Greenshot\icons\fugue\slash.png" />
+    <Content Include="Greenshot\icons\fugue\tick.png" />
+    <Content Include="Greenshot\icons\help.png" />
+    <Content Include="Greenshot\icons\highlighter.png" />
+    <Content Include="Greenshot\icons\page_copy.png" />
+    <Content Include="Greenshot\icons\palette.png" />
+    <Content Include="Greenshot\icons\picture_save.png" />
+    <Content Include="Greenshot\icons\picture_saveas.png" />
+    <Content Include="Greenshot\icons\picture_to_clipboard.png" />
+    <Content Include="Greenshot\icons\printer.png" />
+    <Content Include="Greenshot\icons\propertyitemcontainer.gif" />
+    <Content Include="Greenshot\icons\redo.png" />
+    <Content Include="Greenshot\icons\ruler-crop.png" />
+    <Content Include="Greenshot\icons\shadow.png" />
+    <Content Include="Greenshot\icons\shape_arrowheads.png" />
+    <Content Include="Greenshot\icons\shape_arrow_add.png" />
+    <Content Include="Greenshot\icons\shape_copy.png" />
+    <Content Include="Greenshot\icons\shape_ellipse_add.png" />
+    <Content Include="Greenshot\icons\shape_ellipse_delete.png" />
+    <Content Include="Greenshot\icons\shape_line.png" />
+    <Content Include="Greenshot\icons\shape_paste.png" />
+    <Content Include="Greenshot\icons\shape_square_add.png" />
+    <Content Include="Greenshot\icons\shape_square_bordercolor.png" />
+    <Content Include="Greenshot\icons\shape_square_delete.png" />
+    <Content Include="Greenshot\icons\shape_square_fillcolor.png" />
+    <Content Include="Greenshot\icons\textfield_delete.png" />
+    <Content Include="Greenshot\icons\text_bold.png" />
+    <Content Include="Greenshot\icons\text_dropcaps.png" />
+    <Content Include="Greenshot\icons\text_italic.png" />
+    <Content Include="Greenshot\icons\text_underline.png" />
+    <Content Include="Greenshot\icons\undo.png" />
+    <Content Include="Greenshot\icons\wrench.png" />
+    <Content Include="Greenshot\icons\wrench_orange.png" />
+    <Content Include="Greenshot\icons\zoom.png" />
+    <Content Include="Languages\help-de-DE.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-en-US.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-es-ES.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-fr-FR.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-hu-HU.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-it-IT.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-nl-NL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-pl-PL.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-ru-RU.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-sv-SE.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-tr-TR.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\help-zh-CN.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-ar-SY.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-cs-CZ.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-de-DE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-el-GR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-en-US.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-es-ES.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-fi-FI.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-fr-FR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-he-IL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-hu-HU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-it-IT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-ja-JP.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-lt-LT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-nl-NL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-pl-PL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-pt-BR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-pt-PT.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-ru-RU.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-sv-SE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-tr-TR.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-zh-CN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\language-zh-TW.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Greenshot\Lib\log4net.dll" />
+    <Content Include="log4net-debug.xml" />
+    <Content Include="log4net-portable.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="log4net.xml" />
+    <Content Include="Greenshot\releases\additional_files\installer.txt" />
+    <Content Include="Greenshot\releases\additional_files\license.txt" />
+    <Content Include="Greenshot\releases\additional_files\readme.txt" />
+    <Content Include="Greenshot\releases\innosetup\installer-large.bmp" />
+    <Content Include="Greenshot\releases\innosetup\installer-small.bmp" />
+    <Content Include="Greenshot\releases\innosetup\IssProc\IssProc.dll" />
+    <Content Include="Greenshot\releases\innosetup\scripts\isxdl\isxdl.dll" />
+    <Content Include="Greenshot\sounds\camera.wav" />
+    <Content Include="Greenshot\tools\7zip\7za.exe" />
+    <Content Include="Greenshot\tools\FileVerifier++\COPYING.TXT" />
+    <Content Include="Greenshot\tools\FileVerifier++\fvc.exe" />
+    <Content Include="Greenshot\tools\FileVerifier++\libexpatw.dll" />
+    <Content Include="Greenshot\tools\FileVerifier++\mingwm10.dll" />
+    <Content Include="Greenshot\tools\FileVerifier++\Modules\md.dll" />
+    <Content Include="Greenshot\tools\FileVerifier++\Modules\sha.dll" />
+    <Content Include="Greenshot\tools\innosetup\Compil32.exe" />
+    <Content Include="Greenshot\tools\innosetup\Examples\ISPPExample1License.txt" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyDll.dll" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyDll\C\MyDll.c" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyDll\C\MyDll.def" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyDll\C\MyDll.dsp" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyProg-IA64.exe" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyProg-x64.exe" />
+    <Content Include="Greenshot\tools\innosetup\Examples\MyProg.exe" />
+    <Content Include="Greenshot\tools\innosetup\Examples\Readme-Dutch.txt" />
+    <Content Include="Greenshot\tools\innosetup\Examples\Readme-German.txt" />
+    <Content Include="Greenshot\tools\innosetup\Examples\Readme.txt" />
+    <Content Include="Greenshot\tools\innosetup\isbunzip.dll" />
+    <Content Include="Greenshot\tools\innosetup\isbzip.dll" />
+    <Content Include="Greenshot\tools\innosetup\ISCC.exe" />
+    <Content Include="Greenshot\tools\innosetup\ISCmplr.dll" />
+    <Content Include="Greenshot\tools\innosetup\isfaq.htm" />
+    <Content Include="Greenshot\tools\innosetup\islzma.dll" />
+    <Content Include="Greenshot\tools\innosetup\islzma32.exe" />
+    <Content Include="Greenshot\tools\innosetup\islzma64.exe" />
+    <Content Include="Greenshot\tools\innosetup\ISPP.dll" />
+    <Content Include="Greenshot\tools\innosetup\isscint.dll" />
+    <Content Include="Greenshot\tools\innosetup\isunzlib.dll" />
+    <Content Include="Greenshot\tools\innosetup\iszlib.dll" />
+    <Content Include="Greenshot\tools\innosetup\license.txt" />
+    <Content Include="Greenshot\tools\innosetup\whatsnew.htm" />
+    <Content Include="Greenshot\tools\innosetup\WizModernImage-IS.bmp" />
+    <Content Include="Greenshot\tools\innosetup\WizModernImage.bmp" />
+    <Content Include="Greenshot\tools\innosetup\WizModernSmallImage-IS.bmp" />
+    <Content Include="Greenshot\tools\innosetup\WizModernSmallImage.bmp" />
+    <Content Include="Greenshot\tools\TortoiseSVN\CyrusSASL License.txt" />
+    <Content Include="Greenshot\tools\TortoiseSVN\intl3_tsvn.dll" />
+    <Content Include="Greenshot\tools\TortoiseSVN\libaprutil_tsvn.dll" />
+    <Content Include="Greenshot\tools\TortoiseSVN\libapr_tsvn.dll" />
+    <Content Include="Greenshot\tools\TortoiseSVN\OpenSSL License.txt" />
+    <Content Include="Greenshot\tools\TortoiseSVN\Subversion license.txt" />
+    <Content Include="Greenshot\tools\TortoiseSVN\SubWCRev.exe" />
+    <Content Include="Greenshot\tools\TortoiseSVN\TortoiseSVN License.txt" />
+    <Content Include="Greenshot\web\htdocs\favicon.ico" />
+    <Content Include="Greenshot\web\htdocs\Help\index.de-DE.html" />
+    <Content Include="Greenshot\web\htdocs\Help\index.en-US.html" />
+    <Content Include="Greenshot\web\htdocs\index.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GreenshotPlugin\Interfaces\Drawing\Filters\" />
+    <Folder Include="Greenshot\Drawing\Colors\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
